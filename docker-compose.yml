@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  awssqs-demo-app:
+    image: awssqs-demo-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - AWSSQSDEMO_R2DBC_URL=r2dbc:pool:postgres://localhost:5432/sqs-demo
+      - AWSSQSDEMO_R2DBC_USER=postgres
+      - AWSSQSDEMO_R2DBC_PASSWORD=postgres
+      - AWSSQSDEMO_DB_URL=jdbc:postgresql://localhost:5432/sqs-demo
+      - AWSSQSDEMO_DB_USER=postgres
+      - AWSSQSDEMO_DB_PASSWORD=postgres
+      - AWSSQSDEMO_AWS_ACCESS_KEY=ACCESS_KEY
+      - AWSSQSDEMO_AWS_SECRET_KEY=SECRET_KEY
+      - AWSSQSDEMO_AWS_REGION=us-east-1
+      - AWSSQSDEMO_SQS_QUEUE_NAME=demo-sqs.fifo
+      - AWSSQSDEMO_SQS_QUEUE_REGION=us-east-1
+    deploy:
+      mode: replicated
+      replicas: 3

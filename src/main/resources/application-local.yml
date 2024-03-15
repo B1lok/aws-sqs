@@ -1,0 +1,23 @@
+spring:
+  r2dbc:
+    url: r2dbc:pool:postgres://localhost:5432/sqs-demo
+    username: postgres
+    password: postgres
+  flyway:
+    url: jdbc:postgresql://localhost:5432/sqs-demo
+    user: postgres
+    password: postgres
+    locations: classpath:db/migration
+  cloud:
+    aws:
+      credentials:
+        access-key: ACCESS_KEY
+        secret-key: SECRET_KEY
+      region:
+        static: us-east-1
+
+sqs:
+  notifications:
+    queue:
+      name: demo-sqs.fifo
+      region: us-east-1
